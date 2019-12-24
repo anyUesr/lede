@@ -70,7 +70,7 @@ jobs:
 
       - name: Compile firmware
         run: |
-          make -j1 v=S
+          make -j1 V=s
           echo "======================="
           echo "Space usage:"
           echo "======================="
