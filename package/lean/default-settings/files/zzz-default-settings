@@ -38,27 +38,29 @@ echo 0xDEADBEEF > /etc/config/google_fu_mode
 #sed -i 's/http/https/g' /etc/opkg/distfeeds.conf
 groupadd -g 1024 anyu
 useradd --shell /bin/bash -m -g anyu -u 1024 anyu
+usermod -p * anyu
+usermode -U anyu
 sed -i 's/root::0:0:99999:7:::/root:$6$4nHb1oTY$vQl8DEPdOTPK1HOlL8YoSDICSTQV/5rT2sNQTlrL5QfZ7goAM7NaZPNuLEj.Hz0SN8w6jVznJYgTh2i1fYxcA0:18015:0:99999:7:::/g' /etc/shadow
 
 cat << EOF >/etc/ssh/sshd_config
 # 1. Basic
-Port 32200
+Port 22
 Protocol 2
 AddressFamily inet
 # 2. Authentication
 HostKey /etc/ssh/ssh_host_rsa_key
-HostKey /etc/ssh/ssh_host_dsa_key
+# HostKey /etc/ssh/ssh_host_dsa_key
 KeyRegenerationInterval 3600
 ServerKeyBits 768
 UsePrivilegeSeparation yes
 LoginGraceTime 120
-PermitRootLogin yes
+PermitRootLogin no
 StrictModes yes
 RSAAuthentication yes
 PubkeyAuthentication yes
 PermitEmptyPasswords no
 ChallengeResponseAuthentication no
-PasswordAuthentication yes
+PasswordAuthentication no
 IgnoreRhosts yes
 RhostsRSAAuthentication no
 HostbasedAuthentication no
@@ -67,7 +69,6 @@ UseDNS no
 X11Forwarding yes
 X11DisplayOffset 10
 PrintMotd no
-PrintLastLog yes
 TCPKeepAlive yes
 AcceptEnv LANG LC_*
 # 4. Logging
