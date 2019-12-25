@@ -39,8 +39,8 @@ mkdir /home
 #sed -i 's/http/https/g' /etc/opkg/distfeeds.conf
 groupadd -g 1024 anyu
 useradd --shell /bin/bash -m -g anyu -u 1024 anyu
-usermod -p * anyu
-usermode -U anyu
+usermod -p '*' anyu
+usermod -U anyu
 sed -i 's/root::0:0:99999:7:::/root:$6$4nHb1oTY$vQl8DEPdOTPK1HOlL8YoSDICSTQV/5rT2sNQTlrL5QfZ7goAM7NaZPNuLEj.Hz0SN8w6jVznJYgTh2i1fYxcA0:18015:0:99999:7:::/g' /etc/shadow
 
 cat << EOF >/etc/ssh/sshd_config
