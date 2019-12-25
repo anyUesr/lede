@@ -34,6 +34,7 @@ uci commit minidlna
 
 ln -sf /sbin/ip /usr/bin/ip
 echo 0xDEADBEEF > /etc/config/google_fu_mode
+mkdir /home
 #sed -i 's/downloads.openwrt.org/openwrt.proxy.ustclug.org/g' /etc/opkg/distfeeds.conf
 #sed -i 's/http/https/g' /etc/opkg/distfeeds.conf
 groupadd -g 1024 anyu
