@@ -43,6 +43,25 @@ usermod -p '*' anyu
 usermod -U anyu
 sed -i 's/root::0:0:99999:7:::/root:$6$4nHb1oTY$vQl8DEPdOTPK1HOlL8YoSDICSTQV/5rT2sNQTlrL5QfZ7goAM7NaZPNuLEj.Hz0SN8w6jVznJYgTh2i1fYxcA0:18015:0:99999:7:::/g' /etc/shadow
 
+cat << EOF >/root/.vimrc
+set number
+set nocompatible
+filetype on
+set history=1000
+syntax on
+set autoindent
+set smartindent
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set vb t_vb=
+set ruler
+set incsearch
+set showmatch
+set mouse=
+EOF
+
+
 cat << EOF >/etc/ssh/sshd_config
 # 1. Basic
 Port 22
@@ -50,7 +69,6 @@ Protocol 2
 AddressFamily inet
 # 2. Authentication
 HostKey /etc/ssh/ssh_host_rsa_key
-# HostKey /etc/ssh/ssh_host_dsa_key
 KeyRegenerationInterval 3600
 ServerKeyBits 768
 UsePrivilegeSeparation yes
