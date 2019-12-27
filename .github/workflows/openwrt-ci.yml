@@ -81,7 +81,9 @@ jobs:
           du -h --max-depth=1 ./bin
 
       - name: Prepare artifact
-        run: find ./bin/targets/ -type d -name "packages" | xargs rm -rf {}
+        run: |
+          find ./bin/targets/ -type d -name "packages" | xargs rm -rf {}
+          find . -type f -name '*rootfs*' -exec rm -f {} \;
 
       - name: Upload artifact
         uses: actions/upload-artifact@master
