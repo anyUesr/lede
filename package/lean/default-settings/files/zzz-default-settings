@@ -97,14 +97,14 @@ LogLevel INFO
 Subsystem sftp /usr/lib/sftp-server
 # 6. PAM
 EOF
-
+mkdir /home/anyu/.ssh
 cat << EOF > /home/anyu/.ssh/authorized_keys
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3lZXMRDd1Cx6tiQ3nBn/dJQTkXYGe0IB1JhBPYC0I68WtN5psr1+qcfMk+t0z4zM/56BqN/P4u6ibx2lHBfCy2n6FqrtAxQvXCCWjWr6WIZcUcOW8crsSXPEIkvKpANTG0QwswKfqbD+m6pGZVjaYtjC76mLZ/Ml1dlNQ7dQp+ewuRFRXpZzyfREXG9D+p5mcbBbbcHkULmaQNDw/xih4A2xyCC8UDlor1hRI3j7E6w/r/02RiXZrBOE80M1NlrhP6GnPnPSvlHOYoHP1hw3gsm9XwY+IssZRqtq/OF93PwIt7qRDpzVnMIuhJ4KJ5XiVSRrFTOV9o7FxLFuYZMUZ
 EOF
 
 chown -R anyu:anyu /home/anyu
-chmod 700 /home/anyu/.ssh
-chmod 600 /home/anyu/.ssh/authorized_keys
+chmod 755 /home/anyu/.ssh
+chmod 644 /home/anyu/.ssh/authorized_keys
 
 sed -i "s/# //g" /etc/opkg/distfeeds.conf
 
