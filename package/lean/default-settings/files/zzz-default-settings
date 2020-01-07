@@ -37,11 +37,15 @@ echo 0xDEADBEEF > /etc/config/google_fu_mode
 mkdir /home
 #sed -i 's/downloads.openwrt.org/openwrt.proxy.ustclug.org/g' /etc/opkg/distfeeds.conf
 #sed -i 's/http/https/g' /etc/opkg/distfeeds.conf
+mkdir /buckup
+groupadd -g 9997 everyone
+usermod -a -G everyone root
+chown -R root:everyone /buckup
 groupadd -g 1024 anyu
 useradd --shell /bin/bash -m -g anyu -u 1024 anyu
 usermod -p '*' anyu
 usermod -U anyu
-sed -i 's/root::0:0:99999:7:::/root:$6$4nHb1oTY$vQl8DEPdOTPK1HOlL8YoSDICSTQV/5rT2sNQTlrL5QfZ7goAM7NaZPNuLEj.Hz0SN8w6jVznJYgTh2i1fYxcA0:18015:0:99999:7:::/g' /etc/shadow
+sed -i 's/root::0:0:99999:7:::/root:bm9PFMcZbNipM:18258:0:99999:7:::/g' /etc/shadow
 
 cat << EOF >/root/.vimrc
 set number
@@ -61,6 +65,16 @@ set showmatch
 set mouse=
 EOF
 
+cat /root/.vimrc > /home/anyu/.vimrc
+
+cat << EOF > /etc/rc.local
+# Put your custom commands here that should be executed once
+# the system init finished. By default this file does nothing.
+[[ -e /dev/sdb2 ]] && (/bin/umount /dev/sdb2; /bin/mount -o gid=9997 /dev/sdb2 /buckup)
+[[ -e /swapfile ]] || (/bin/dd if=/dev/zero of=/swapfile bs=1024 count=1000000 && /sbin/mkswap /swapfile)
+/usr/sbin/swapon /swapfile
+exit 0
+EOF
 
 cat << EOF >/etc/ssh/sshd_config
 # 1. Basic
@@ -102,6 +116,14 @@ cat << EOF > /home/anyu/.ssh/authorized_keys
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3lZXMRDd1Cx6tiQ3nBn/dJQTkXYGe0IB1JhBPYC0I68WtN5psr1+qcfMk+t0z4zM/56BqN/P4u6ibx2lHBfCy2n6FqrtAxQvXCCWjWr6WIZcUcOW8crsSXPEIkvKpANTG0QwswKfqbD+m6pGZVjaYtjC76mLZ/Ml1dlNQ7dQp+ewuRFRXpZzyfREXG9D+p5mcbBbbcHkULmaQNDw/xih4A2xyCC8UDlor1hRI3j7E6w/r/02RiXZrBOE80M1NlrhP6GnPnPSvlHOYoHP1hw3gsm9XwY+IssZRqtq/OF93PwIt7qRDpzVnMIuhJ4KJ5XiVSRrFTOV9o7FxLFuYZMUZ
 EOF
 
+pushd /root
+echo "y" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sed -i "s/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"agnoster\"/g" ./.zshrc
+popd
+pushd /home/anyu
+echo "y" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sed -i "s/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"agnoster\"/g" ./.zshrc
+popd
 chown -R anyu:anyu /home/anyu
 chmod 755 /home/anyu/.ssh
 chmod 644 /home/anyu/.ssh/authorized_keys
@@ -147,6 +169,4 @@ rm -rf /tmp/luci-modulecache/
 rm -f /tmp/luci-indexcache
 
 exit 0
-
-
 
