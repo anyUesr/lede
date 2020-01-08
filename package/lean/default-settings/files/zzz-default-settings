@@ -1,4 +1,4 @@
-#!/bin/sh
+#! /bin/sh
 
 uci set luci.main.lang=zh_cn
 uci commit luci
@@ -7,7 +7,7 @@ uci set system.@system[0].timezone=CST-8
 uci set system.@system[0].zonename=Asia/Shanghai
 uci commit system
 
-uci set fstab.@global[0].anon_mount=1
+uci set fstab.@global[0].anon_mount=0
 uci commit fstab
 
 rm -f /usr/lib/lua/luci/view/admin_status/index/mwan.htm
@@ -71,14 +71,14 @@ cat << EOF > /etc/rc.local
 # Put your custom commands here that should be executed once
 # the system init finished. By default this file does nothing.
 [[ -e /dev/sdb2 ]] && (/bin/umount /dev/sdb2; /bin/mount -o gid=9997 /dev/sdb2 /buckup)
-[[ -e /swapfile ]] || (/bin/dd if=/dev/zero of=/swapfile bs=1024 count=1000000 && /sbin/mkswap /swapfile)
+[[ -e /swapfile ]] || (/bin/dd if=/dev/zero of=/swapfile bs=1024 count=1048576 && /sbin/mkswap /swapfile)
 /usr/sbin/swapon /swapfile
 exit 0
 EOF
 
 cat << EOF >/etc/ssh/sshd_config
 # 1. Basic
-Port 22
+Port 32200
 Protocol 2
 AddressFamily inet
 # 2. Authentication
@@ -117,12 +117,12 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3lZXMRDd1Cx6tiQ3nBn/dJQTkXYGe0IB1JhBPYC0I
 EOF
 
 pushd /root
-echo "y" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-sed -i "s/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"agnoster\"/g" ./.zshrc
+((echo "y" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)") && sed -i "s/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"agnoster\"/g" ./.zshrc)
+chsh -s /usr/bin/zsh root
 popd
 pushd /home/anyu
-echo "y" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-sed -i "s/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"agnoster\"/g" ./.zshrc
+((echo "y" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)") && sed -i "s/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"agnoster\"/g" ./.zshrc)
+chsh -s /usr/bin/zsh anyu
 popd
 chown -R anyu:anyu /home/anyu
 chmod 755 /home/anyu/.ssh
