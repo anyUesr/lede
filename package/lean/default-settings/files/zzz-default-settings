@@ -7,7 +7,7 @@ uci set system.@system[0].timezone=CST-8
 uci set system.@system[0].zonename=Asia/Shanghai
 uci commit system
 
-uci set fstab.@global[0].anon_mount=1
+uci set fstab.@global[0].anon_mount=0
 uci commit fstab
 
 rm -f /usr/lib/lua/luci/view/admin_status/index/mwan.htm
@@ -163,8 +163,5 @@ uci set network.lan.proto='static'
 # uci set network.lan.type='bridge'
 uci set network.lan.ifname='eth1'
 uci commit network
-
-opkg update
-opkg install bash shadow
 
 exit 0
