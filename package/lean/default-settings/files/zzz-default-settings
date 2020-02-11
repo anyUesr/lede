@@ -1,6 +1,4 @@
-#! /bin/sh
-
-set -x
+#!/bin/sh
 
 uci set luci.main.lang=zh_cn
 uci commit luci
@@ -9,7 +7,7 @@ uci set system.@system[0].timezone=CST-8
 uci set system.@system[0].zonename=Asia/Shanghai
 uci commit system
 
-uci set fstab.@global[0].anon_mount=0
+uci set fstab.@global[0].anon_mount=1
 uci commit fstab
 
 rm -f /usr/lib/lua/luci/view/admin_status/index/mwan.htm
@@ -29,16 +27,60 @@ sed -i 's/\"services\"/\"nas\"/g' /usr/lib/lua/luci/controller/usb_printer.lua
 sed -i 's/\"services\"/\"nas\"/g' /usr/lib/lua/luci/controller/xunlei.lua
 sed -i 's/services/nas/g'  /usr/lib/lua/luci/view/minidlna_status.htm
 
-uci set minidlna.config.enabled=0
-uci commit minidlna
-/etc/init.d/minidlna enable
-/etc/init.d/minidlna stop
-
 ln -sf /sbin/ip /usr/bin/ip
+
+sed -i 's/downloads.openwrt.org/openwrt.proxy.ustclug.org/g' /etc/opkg/distfeeds.conf
+sed -i 's/http/https/g' /etc/opkg/distfeeds.conf
+sed -i 's/root::0:0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/g' /etc/shadow
+
+sed -i "s/# //g" /etc/opkg/distfeeds.conf
+
+sed -i '/REDIRECT --to-ports 53/d' /etc/firewall.user
+echo "iptables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53" >> /etc/firewall.user
+echo "iptables -t nat -A PREROUTING -p tcp --dport 53 -j REDIRECT --to-ports 53" >> /etc/firewall.user
+
+sed -i '/option disabled/d' /etc/config/wireless
+sed -i '/set wireless.radio${devidx}.disabled/d' /lib/wifi/mac80211.sh
+wifi up
+
+sed -i '/DISTRIB_REVISION/d' /etc/openwrt_release
+echo "DISTRIB_REVISION='R20.1.24'" >> /etc/openwrt_release
+sed -i '/DISTRIB_DESCRIPTION/d' /etc/openwrt_release
+echo "DISTRIB_DESCRIPTION='OpenWrt '" >> /etc/openwrt_release
+
+sed -i '/log-facility/d' /etc/dnsmasq.conf
+echo "log-facility=/dev/null" >> /etc/dnsmasq.conf
+
+sed -i 's/cbi.submit\"] = true/cbi.submit\"] = \"1\"/g' /usr/lib/lua/luci/dispatcher.lua
+
+rm -rf /tmp/luci-modulecache/
+rm -f /tmp/luci-indexcache
+
 echo 0xDEADBEEF > /etc/config/google_fu_mode
+uci set dhcp.lan.ra='server'
+uci set dhcp.lan.dhcpv6='server'
+uci set dhcp.lan.ra_management='1'
+uci set dhcp.lan.ra_default='1'
+uci commit dhcp
+uci set network.wan.proto='pppoe'
+uci set network.wan.username='057145652406'
+uci set network.wan.password='707334'
+uci set network.wan.ipv6='0'
+uci set network.wan.ifname='eth0'
+uci set network.lan.ipaddr='192.168.2.1'
+uci set network.lan.netmask='255.255.255.0'
+uci set network.lan.proto='static'
+uci set network.lan.type='bridge'
+uci set network.lan.ifname='eth1'
+uci commit network
+
+opkg update
+opkg install shadow
+
+uci set fstab.@global[0].anon_mount=0
+uci commit fstab
+
 mkdir /home
-#sed -i 's/downloads.openwrt.org/openwrt.proxy.ustclug.org/g' /etc/opkg/distfeeds.conf
-#sed -i 's/http/https/g' /etc/opkg/distfeeds.conf
 mkdir /buckup
 groupadd -g 9997 everyone
 usermod -a -G everyone root
@@ -47,7 +89,7 @@ groupadd -g 1024 anyu
 useradd --shell /bin/bash -m -g anyu -u 1024 anyu
 usermod -p '*' anyu
 usermod -U anyu
-sed -i 's/root::0:0:99999:7:::/root:bm9PFMcZbNipM:18258:0:99999:7:::/g' /etc/shadow
+sed -i 's/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/root:bm9PFMcZbNipM:18258:0:99999:7:::/g' /etc/shadow
 
 cat << EOF >/root/.vimrc
 set number
@@ -123,43 +165,5 @@ chmod 755 /home/anyu/.ssh
 chmod 644 /home/anyu/.ssh/authorized_keys
 
 sed -i "s/# //g" /etc/opkg/distfeeds.conf
-
-
-uci set dhcp.lan.ra='server'
-uci set dhcp.lan.dhcpv6='server'
-uci set dhcp.lan.ra_management='1'
-uci set dhcp.lan.ra_default='1'
-uci commit dhcp
-uci set network.wan.proto='pppoe'
-uci set network.wan.username='057145652406'
-uci set network.wan.password='707334'
-uci set network.wan.ipv6='0'
-uci set network.wan.ifname='eth0'
-uci set network.lan.ipaddr='192.168.2.1'
-uci set network.lan.netmask='255.255.255.0'
-uci set network.lan.proto='static'
-uci set network.lan.type='bridge'
-uci set network.lan.ifname='eth1'
-uci commit network
-sed -i '/REDIRECT --to-ports 53/d' /etc/firewall.user
-echo "iptables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53" >> /etc/firewall.user
-echo "iptables -t nat -A PREROUTING -p tcp --dport 53 -j REDIRECT --to-ports 53" >> /etc/firewall.user
-
-sed -i '/option disabled/d' /etc/config/wireless
-sed -i '/set wireless.radio${devidx}.disabled/d' /lib/wifi/mac80211.sh
-wifi up
-
-sed -i '/DISTRIB_REVISION/d' /etc/openwrt_release
-echo "DISTRIB_REVISION='R20.1.24'" >> /etc/openwrt_release
-sed -i '/DISTRIB_DESCRIPTION/d' /etc/openwrt_release
-echo "DISTRIB_DESCRIPTION='OpenWrt '" >> /etc/openwrt_release
-
-sed -i '/log-facility/d' /etc/dnsmasq.conf
-echo "log-facility=/dev/null" >> /etc/dnsmasq.conf
-
-sed -i 's/cbi.submit\"] = true/cbi.submit\"] = \"1\"/g' /usr/lib/lua/luci/dispatcher.lua
-
-rm -rf /tmp/luci-modulecache/
-rm -f /tmp/luci-indexcache
 
 exit 0
