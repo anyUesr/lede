@@ -70,7 +70,8 @@ jobs:
 
       - name: Compile firmware
         run: |
-          make -j$(expr $(nproc) \* 2)
+          make -j1 V=s
+          # make -j$(expr $(nproc) \* 2)
           echo "======================="
           echo "Space usage:"
           echo "======================="
