@@ -30,14 +30,13 @@ sed -i 's/services/nas/g'  /usr/lib/lua/luci/view/minidlna_status.htm
 ln -sf /sbin/ip /usr/bin/ip
 
 cat << EOF >/etc/opkg/distfeeds.conf 
-src/gz openwrt_core http://mirrors.ustc.edu.cn/lede/releases/18.06.4/targets/x86/64/packages
-src/gz openwrt_base http://mirrors.ustc.edu.cn/lede/releases/18.06.4/packages/x86_64/base
-src/gz openwrt_luci http://mirrors.ustc.edu.cn/lede/releases/18.06.4/packages/x86_64/luci
-src/gz openwrt_packages http://mirrors.ustc.edu.cn/lede/releases/18.06.4/packages/x86_64/packages
-src/gz openwrt_routing http://mirrors.ustc.edu.cn/lede/releases/18.06.4/packages/x86_64/routing
+src/gz openwrt_core https://mirrors.tuna.tsinghua.edu.cn/lede/releases/18.06.4/targets/x86/64/packages
+src/gz openwrt_base https://mirrors.tuna.tsinghua.edu.cn/lede/releases/18.06.4/packages/x86_64/base
+src/gz openwrt_luci https://mirrors.tuna.tsinghua.edu.cn/lede/releases/18.06.4/packages/x86_64/luci
+src/gz openwrt_packages https://mirrors.tuna.tsinghua.edu.cn/lede/releases/18.06.4/packages/x86_64/packages
+src/gz openwrt_routing https://mirrors.tuna.tsinghua.edu.cn/lede/releases/18.06.4/packages/x86_64/routing
 EOF
-# sed -i 's/downloads.openwrt.org/openwrt.proxy.ustclug.org/g' /etc/opkg/distfeeds.conf
-# sed -i 's/http/https/g' /etc/opkg/distfeeds.conf
+
 sed -i 's/root::0:0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/g' /etc/shadow
 
 sed -i "s/# //g" /etc/opkg/distfeeds.conf
@@ -95,7 +94,7 @@ groupadd -g 1024 anyu
 useradd --shell /bin/bash -m -g anyu -u 1024 anyu
 usermod -p '*' anyu
 usermod -U anyu
-sed -i 's/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/root:bm9PFMcZbNipM:18258:0:99999:7:::/g' /etc/shadow
+usermod -p '$1$kILcINSE$5BTorITbpIARBcudCBJY01' root
 
 cat << EOF >/root/.vimrc
 set number
@@ -170,6 +169,6 @@ chown -R anyu:anyu /home/anyu
 chmod 755 /home/anyu/.ssh
 chmod 644 /home/anyu/.ssh/authorized_keys
 
-sed -i "s/# //g" /etc/opkg/distfeeds.conf
+# sed -i "s/# //g" /etc/opkg/distfeeds.conf
 
 exit 0
