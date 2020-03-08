@@ -18,7 +18,7 @@ on:
   #   - cron: 0 20 * * *
 
 env:
-  multithreads: false
+  multithreads: true
   TZ: Asia/Shanghai
 
 jobs:
