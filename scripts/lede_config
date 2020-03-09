@@ -47,6 +47,7 @@ CONFIG_PACKAGE_grub2-efi=y
 # CONFIG_PACKAGE_kmod-rt2x00-lib is not set
 # CONFIG_PACKAGE_kmod-usb-hid is not set
 # CONFIG_PACKAGE_kmod-usb-net is not set
+# CONFIG_PACKAGE_hostapd-common is not set
 CONFIG_PACKAGE_libcurl=y
 CONFIG_PACKAGE_liblzo=y
 CONFIG_PACKAGE_libpopt=y
