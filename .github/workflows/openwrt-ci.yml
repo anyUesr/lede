@@ -18,7 +18,8 @@ on:
   #   - cron: 0 20 * * *
 
 env:
-  multithreads: true
+  SSH_ACTIONS: true
+  multithreads: false
   TZ: Asia/Shanghai
 
 jobs:
@@ -60,6 +61,10 @@ jobs:
         run: |
           ./scripts/feeds update -a
           ./scripts/feeds install -a
+
+      - name: SSH connection to Actions
+        uses: P3TERX/debugger-action@master
+        if: env.SSH_ACTIONS == 'true'
 
       - name: Generate configuration file
         run: |
