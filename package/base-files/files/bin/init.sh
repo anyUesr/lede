@@ -48,7 +48,7 @@ src/gz openwrt_packages https://mirrors.tuna.tsinghua.edu.cn/lede/releases/19.07
 src/gz openwrt_routing https://mirrors.tuna.tsinghua.edu.cn/lede/releases/19.07.2/packages/x86_64/routing
 EOF
 
-opkg update && opkg install shadow git git-http vim-fuller lsof
+opkg update && opkg install shadow
 
 mkdir /home
 mkdir /buckup

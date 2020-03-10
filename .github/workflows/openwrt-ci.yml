@@ -18,8 +18,8 @@ on:
   #   - cron: 0 20 * * *
 
 env:
-  SSH_ACTIONS: true
-  multithreads: true
+  SSH_ACTIONS: false
+  multithreads: false
   TZ: Asia/Shanghai
 
 jobs:
