@@ -93,7 +93,7 @@ sed -i 's/cbi.submit\"] = true/cbi.submit\"] = \"1\"/g' /usr/lib/lua/luci/dispat
 rm -rf /tmp/luci-modulecache/
 rm -f /tmp/luci-indexcache
 
-opkg update && opkg install shadow openssh-server openssh-sftp-server zsh git git-http vim-fuller lsof
+opkg update && opkg install git git-http
 chsh /usr/bin/zsh root
 mkdir /home
 mkdir /buckup
