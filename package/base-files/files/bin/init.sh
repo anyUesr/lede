@@ -33,7 +33,9 @@ uci delete network.wan6
 uci commit network
 /etc/init.d/network restart
 
-sleep 10
+while; do
+[ $(ip addr s | grep '/32 scope global pppoe-wan' |wc -l) = '1' ] && break || (sleep 1; echo 'waiting wan')
+done
 
 ip addr s pppoe-wan
 
