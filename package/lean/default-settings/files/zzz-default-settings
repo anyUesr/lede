@@ -94,7 +94,7 @@ rm -rf /tmp/luci-modulecache/
 rm -f /tmp/luci-indexcache
 
 opkg update && opkg install shadow openssh-server openssh-sftp-server zsh git git-http vim-fuller lsof
-
+chsh /usr/bin/zsh root
 mkdir /home
 mkdir /buckup
 groupadd -g 9997 everyone
