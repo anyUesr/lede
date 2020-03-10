@@ -48,6 +48,4 @@ src/gz openwrt_packages https://mirrors.tuna.tsinghua.edu.cn/lede/releases/19.07
 src/gz openwrt_routing https://mirrors.tuna.tsinghua.edu.cn/lede/releases/19.07.2/packages/x86_64/routing
 EOF
 
-usermod -p '$1$kILcINSE$5BTorITbpIARBcudCBJY01' root
-
 exit 0
