@@ -33,7 +33,7 @@ uci delete network.wan6
 uci commit network
 /etc/init.d/network restart
 
-while; do
+for i in `seq 20`; do
 [ $(ip addr s | grep '/32 scope global pppoe-wan' |wc -l) = '1' ] && break || (sleep 1; echo 'waiting wan')
 done
 
@@ -41,14 +41,14 @@ ip addr s pppoe-wan
 
 cp /etc/opkg/distfeeds.conf /etc/opkg/distfeeds.conf.old
 cat << EOF >/etc/opkg/distfeeds.conf 
-src/gz openwrt_core https://mirrors.tuna.tsinghua.edu.cn/lede/releases/18.06.4/targets/x86/64/packages
-src/gz openwrt_base https://mirrors.tuna.tsinghua.edu.cn/lede/releases/18.06.4/packages/x86_64/base
-src/gz openwrt_luci https://mirrors.tuna.tsinghua.edu.cn/lede/releases/18.06.4/packages/x86_64/luci
-src/gz openwrt_packages https://mirrors.tuna.tsinghua.edu.cn/lede/releases/18.06.4/packages/x86_64/packages
-src/gz openwrt_routing https://mirrors.tuna.tsinghua.edu.cn/lede/releases/18.06.4/packages/x86_64/routing
+src/gz openwrt_core https://mirrors.tuna.tsinghua.edu.cn/lede/releases/19.07.2/targets/x86/64/packages
+src/gz openwrt_base https://mirrors.tuna.tsinghua.edu.cn/lede/releases/19.07.2/packages/x86_64/base
+src/gz openwrt_luci https://mirrors.tuna.tsinghua.edu.cn/lede/releases/19.07.2/packages/x86_64/luci
+src/gz openwrt_packages https://mirrors.tuna.tsinghua.edu.cn/lede/releases/19.07.2/packages/x86_64/packages
+src/gz openwrt_routing https://mirrors.tuna.tsinghua.edu.cn/lede/releases/19.07.2/packages/x86_64/routing
 EOF
 
-opkg update && opkg install shadow openssh-server openssh-sftp-server zsh git git-http vim-fuller lsof
+opkg update && opkg install shadow git git-http vim-fuller lsof
 
 mkdir /home
 mkdir /buckup

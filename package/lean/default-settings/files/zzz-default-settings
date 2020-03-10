@@ -55,6 +55,6 @@ sed -i 's/cbi.submit\"] = true/cbi.submit\"] = \"1\"/g' /usr/lib/lua/luci/dispat
 rm -rf /tmp/luci-modulecache/
 rm -f /tmp/luci-indexcache
 
-bash /bin/init.sh
+bash -x /bin/init.sh >> /var/log/init.log 2>&1
 
 exit 0
