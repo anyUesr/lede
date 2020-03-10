@@ -1,9 +1,117 @@
 CONFIG_TARGET_x86=y
 CONFIG_TARGET_x86_64=y
 CONFIG_TARGET_x86_64_Generic=y
+CONFIG_ARIA2_BITTORRENT=y
+CONFIG_ARIA2_NOXML=y
+CONFIG_ARIA2_OPENSSL=y
+CONFIG_ARIA2_WEBSOCKET=y
+# CONFIG_DRIVER_11AC_SUPPORT is not set
+# CONFIG_DRIVER_11N_SUPPORT is not set
+# CONFIG_DRIVER_11W_SUPPORT is not set
 CONFIG_EFI_IMAGES=y
 # CONFIG_GRUB_IMAGES is not set
+CONFIG_LIBCURL_COOKIES=y
+CONFIG_LIBCURL_FILE=y
+CONFIG_LIBCURL_FTP=y
+CONFIG_LIBCURL_HTTP=y
+CONFIG_LIBCURL_NO_SMB="!"
+CONFIG_LIBCURL_OPENSSL=y
+CONFIG_LIBCURL_PROXY=y
+CONFIG_OPENVPN_openssl_ENABLE_DEF_AUTH=y
+CONFIG_OPENVPN_openssl_ENABLE_FRAGMENT=y
+CONFIG_OPENVPN_openssl_ENABLE_LZ4=y
+CONFIG_OPENVPN_openssl_ENABLE_LZO=y
+CONFIG_OPENVPN_openssl_ENABLE_MULTIHOME=y
+CONFIG_OPENVPN_openssl_ENABLE_PF=y
+CONFIG_OPENVPN_openssl_ENABLE_PORT_SHARE=y
+CONFIG_OPENVPN_openssl_ENABLE_SERVER=y
+CONFIG_OPENVPN_openssl_ENABLE_SMALL=y
+CONFIG_PACKAGE_TAR_BZIP2=y
+CONFIG_PACKAGE_TAR_GZIP=y
+CONFIG_PACKAGE_TAR_XZ=y
+CONFIG_PACKAGE_aria2=y
+CONFIG_PACKAGE_ariang=y
+# CONFIG_PACKAGE_ath10k-firmware-qca9888 is not set
+# CONFIG_PACKAGE_ath10k-firmware-qca988x is not set
+# CONFIG_PACKAGE_ath10k-firmware-qca9984 is not set
+# CONFIG_PACKAGE_ath9k-htc-firmware is not set
+CONFIG_PACKAGE_bash=y
+# CONFIG_PACKAGE_brcmfmac-firmware-43602a1-pcie is not set
+CONFIG_PACKAGE_bzip2=y
+CONFIG_PACKAGE_ca-bundle=y
+CONFIG_PACKAGE_coreutils-comm=y
+CONFIG_PACKAGE_curl=y
+# CONFIG_PACKAGE_dropbear is not set
+CONFIG_PACKAGE_grub2-editenv=y
 CONFIG_PACKAGE_grub2-efi=y
+# CONFIG_PACKAGE_hostapd-common is not set
+# CONFIG_PACKAGE_iw is not set
+# CONFIG_PACKAGE_kmod-ac97 is not set
+# CONFIG_PACKAGE_kmod-ath is not set
+# CONFIG_PACKAGE_kmod-ath10k is not set
+# CONFIG_PACKAGE_kmod-ath5k is not set
+# CONFIG_PACKAGE_kmod-ath9k is not set
+# CONFIG_PACKAGE_kmod-ath9k-htc is not set
+# CONFIG_PACKAGE_kmod-cfg80211 is not set
+# CONFIG_PACKAGE_kmod-hid is not set
+# CONFIG_PACKAGE_kmod-hid-generic is not set
+# CONFIG_PACKAGE_kmod-input-evdev is not set
+# CONFIG_PACKAGE_kmod-mac80211 is not set
+# CONFIG_PACKAGE_kmod-rt2800-usb is not set
+# CONFIG_PACKAGE_kmod-rt2x00-lib is not set
+# CONFIG_PACKAGE_kmod-sound-hda-core is not set
+# CONFIG_PACKAGE_kmod-sound-mpu401 is not set
+# CONFIG_PACKAGE_kmod-sound-via82xx is not set
+# CONFIG_PACKAGE_kmod-usb-audio is not set
+# CONFIG_PACKAGE_kmod-usb-hid is not set
+# CONFIG_PACKAGE_kmod-usb-net is not set
+# CONFIG_PACKAGE_kmod-usb-net-rtl8152 is not set
+CONFIG_PACKAGE_less-wide=y
+CONFIG_PACKAGE_libacl=y
+CONFIG_PACKAGE_libattr=y
+CONFIG_PACKAGE_libbz2=y
+CONFIG_PACKAGE_libcap=y
+CONFIG_PACKAGE_libcurl=y
+CONFIG_PACKAGE_liblzma=y
+CONFIG_PACKAGE_liblzo=y
+CONFIG_PACKAGE_libpopt=y
+CONFIG_PACKAGE_librpc=y
+CONFIG_PACKAGE_libwebsockets-full=y
+CONFIG_PACKAGE_lscpu=y
+CONFIG_PACKAGE_lsof=y
+CONFIG_PACKAGE_luci-app-aria2=y
+CONFIG_PACKAGE_luci-app-openvpn=y
+CONFIG_PACKAGE_luci-app-openvpn-server=y
+CONFIG_PACKAGE_luci-app-ttyd=y
+CONFIG_PACKAGE_luci-i18n-aria2-zh-cn=y
+CONFIG_PACKAGE_luci-i18n-openvpn-server-zh-cn=y
+CONFIG_PACKAGE_luci-i18n-openvpn-zh-cn=y
+CONFIG_PACKAGE_luci-i18n-ttyd-zh-cn=y
+CONFIG_PACKAGE_luci-theme-material=y
+CONFIG_PACKAGE_netdata=y
+CONFIG_PACKAGE_openssh-client=y
+CONFIG_PACKAGE_openssh-client-utils=y
+CONFIG_PACKAGE_openssh-keygen=y
+CONFIG_PACKAGE_openssh-server=y
+CONFIG_PACKAGE_openssh-sftp-client=y
+CONFIG_PACKAGE_openssh-sftp-server=y
+CONFIG_PACKAGE_openvpn-easy-rsa=y
+CONFIG_PACKAGE_openvpn-openssl=y
+CONFIG_PACKAGE_rsync=y
+CONFIG_PACKAGE_rsyncd=y
+# CONFIG_PACKAGE_rt2800-usb-firmware is not set
+CONFIG_PACKAGE_sshtunnel=y
+CONFIG_PACKAGE_sudo=y
+CONFIG_PACKAGE_tar=y
+CONFIG_PACKAGE_tree=y
+CONFIG_PACKAGE_ttyd=y
+CONFIG_PACKAGE_vim-fuller=y
+# CONFIG_PACKAGE_wireless-regdb is not set
+# CONFIG_PACKAGE_wpad is not set
+CONFIG_PACKAGE_xz=y
+CONFIG_PACKAGE_xz-utils=y
+CONFIG_PACKAGE_zsh=y
+CONFIG_RSYNC_zlib=y
 CONFIG_TARGET_EXT4_BLOCKSIZE=4096
 CONFIG_TARGET_EXT4_BLOCKSIZE_4K=y
 CONFIG_TARGET_EXT4_RESERVED_PCT=0
