@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-ssr-plus
-PKG_VERSION:=171
+PKG_VERSION:=174
 PKG_RELEASE:=6
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
@@ -9,14 +9,6 @@ PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 include $(INCLUDE_DIR)/package.mk
 
 define Package/$(PKG_NAME)/config
-config PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks
-	bool "Include Shadowsocks New Version"
-	default y if x86||x86_64||arm||aarch64
-
-config PACKAGE_$(PKG_NAME)_INCLUDE_Simple_obfs
-	bool "Include Shadowsocks Simple-obfs Plugin"
-	default y if x86||x86_64||arm||aarch64
-
 config PACKAGE_$(PKG_NAME)_INCLUDE_V2ray_plugin
 	bool "Include Shadowsocks V2ray Plugin"
 	default y if x86||x86_64||arm||aarch64
@@ -41,7 +33,7 @@ config PACKAGE_$(PKG_NAME)_INCLUDE_ShadowsocksR_Server
 	bool "Include ShadowsocksR Server"
 	default y if x86||x86_64||arm||aarch64
 endef
-	
+
 define Package/$(PKG_NAME)
 	SECTION:=luci
 	CATEGORY:=LuCI
@@ -49,12 +41,11 @@ define Package/$(PKG_NAME)
 	TITLE:=SS/SSR/V2Ray/Trojan LuCI interface
 	PKGARCH:=all
 	DEPENDS:=+shadowsocksr-libev-alt +ipset +ip-full +iptables-mod-tproxy +dnsmasq-full +coreutils +coreutils-base64 +pdnsd-alt +wget +lua +libuci-lua \
-	+microsocks +ipt2socks +dns2socks +shadowsocks-libev-ss-local +shadowsocksr-libev-ssr-local \
-	+PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks:shadowsocks-libev-ss-redir \
-	+PACKAGE_$(PKG_NAME)_INCLUDE_Simple_obfs:simple-obfs \
+	+microsocks +dns2socks +shadowsocks-libev-ss-local +shadowsocksr-libev-ssr-local +shadowsocks-libev-ss-redir +simple-obfs +tcpping +proxychains-ng \
 	+PACKAGE_$(PKG_NAME)_INCLUDE_V2ray_plugin:v2ray-plugin \
 	+PACKAGE_$(PKG_NAME)_INCLUDE_V2ray:v2ray \
 	+PACKAGE_$(PKG_NAME)_INCLUDE_Trojan:trojan \
+	+PACKAGE_$(PKG_NAME)_INCLUDE_Trojan:ipt2socks \
 	+PACKAGE_$(PKG_NAME)_INCLUDE_Redsocks2:redsocks2 \
 	+PACKAGE_$(PKG_NAME)_INCLUDE_Kcptun:kcptun-client \
 	+PACKAGE_$(PKG_NAME)_INCLUDE_ShadowsocksR_Server:shadowsocksr-libev-server
@@ -77,9 +68,6 @@ define Package/$(PKG_NAME)/conffiles
 endef
 
 define Package/$(PKG_NAME)/install
-	$(INSTALL_DIR) $(1)/etc
-	$(INSTALL_DATA) ./root/etc/china_ssr.txt $(1)/etc/china_ssr.txt
-
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_CONF) ./root/etc/config/shadowsocksr $(1)/etc/config/shadowsocksr
 	$(INSTALL_DATA) ./root/etc/config/*.list $(1)/etc/config/
