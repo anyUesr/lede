@@ -120,6 +120,9 @@ jobs:
       - name: Prepare artifact
         run: |
           find ./bin/targets/ -type d -name "packages" | xargs rm -rf {}
+          pushd ./bin/targets/x86/64
+          gzip openwrt-x86-64-combined-ext4.img
+          popd
           find . -type f -name '*rootfs*' -exec rm -f {} \;
 
       - name: Upload artifact
