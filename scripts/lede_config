@@ -10,9 +10,11 @@ CONFIG_TARGET_x86_64_Generic=y
 # CONFIG_PACKAGE_ath9k-htc-firmware is not set
 CONFIG_PACKAGE_bash=y
 # CONFIG_PACKAGE_brcmfmac-firmware-43602a1-pcie is not set
+CONFIG_PACKAGE_coreutils=y
 CONFIG_PACKAGE_coreutils-nohup=y
 CONFIG_PACKAGE_curl=y
 # CONFIG_PACKAGE_hostapd-common is not set
+CONFIG_PACKAGE_iptables-mod-tproxy=y
 # CONFIG_PACKAGE_iw is not set
 # CONFIG_PACKAGE_kmod-ath is not set
 # CONFIG_PACKAGE_kmod-ath10k is not set
@@ -22,8 +24,15 @@ CONFIG_PACKAGE_curl=y
 # CONFIG_PACKAGE_kmod-cfg80211 is not set
 # CONFIG_PACKAGE_kmod-hid is not set
 # CONFIG_PACKAGE_kmod-hid-generic is not set
+CONFIG_PACKAGE_kmod-hwmon-nct6775=y
+CONFIG_PACKAGE_kmod-hwmon-pwmfan=y
+CONFIG_PACKAGE_kmod-hwmon-vid=y
 # CONFIG_PACKAGE_kmod-input-evdev is not set
+CONFIG_PACKAGE_kmod-ip6tables=y
+CONFIG_PACKAGE_kmod-ipt-tproxy=y
 # CONFIG_PACKAGE_kmod-mac80211 is not set
+CONFIG_PACKAGE_kmod-nf-ipt6=y
+CONFIG_PACKAGE_kmod-nf-reject6=y
 # CONFIG_PACKAGE_kmod-rt2800-usb is not set
 # CONFIG_PACKAGE_kmod-rt2x00-lib is not set
 # CONFIG_PACKAGE_kmod-sound-hda-core is not set
