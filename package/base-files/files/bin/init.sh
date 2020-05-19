@@ -3,7 +3,7 @@
 uci set fstab.@global[0].anon_mount=0
 uci set fstab.@global[0].auto_mount=0
 uci commit fstab
-chmod 0755 /etc/openclash/clash-linux*
+chmod 0755 /etc/openclash/core/clash*
 echo 0xDEADBEEF > /etc/config/google_fu_mode
 
 uci set dhcp.lan.ra='server'
