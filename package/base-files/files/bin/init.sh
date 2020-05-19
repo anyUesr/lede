@@ -1,5 +1,6 @@
 #! /bin/sh
 
+sed -i 's/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/root:$1$kILcINSE$5BTorITbpIARBcudCBJY01:0:0:99999:7:::/g' /etc/shadow
 uci set fstab.@global[0].anon_mount=0
 uci set fstab.@global[0].auto_mount=0
 uci commit fstab
