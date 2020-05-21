@@ -19,7 +19,7 @@ on:
 
 env:
   SSH_ACTIONS: false
-  multithreads: true
+  multithreads: false
   TZ: Asia/Shanghai
 
 jobs:
